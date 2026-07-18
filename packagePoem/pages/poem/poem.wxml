@@ -32,7 +32,7 @@
   <view class="toolbar">
     <button class="tbtn primary" bindtap="onStartRecite" wx:if="{{!reciting}}">我要跟读</button>
     <button class="tbtn primary" bindtap="onStopRecite" wx:else>停止跟读</button>
-    <button class="tbtn {{playing ? 'playing' : ''}}" bindtap="onPlayRecord" wx:if="{{userAudio}}">{{playing ? '停止回放' : '回放自评'}}</button>
+    <button class="tbtn {{playState !== 'idle' ? 'playing' : ''}}" bindtap="onPlayRecord" wx:if="{{userAudio}}">{{playState === 'playing' ? '暂停回放' : (playState === 'paused' ? '继续回放' : '回放自评')}}</button>
   </view>
   <view class="tip">提示：跟读录音仅保存在你的设备本地，用于对照原文回放练习，不会上传。</view>
 

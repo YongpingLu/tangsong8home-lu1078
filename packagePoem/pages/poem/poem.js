@@ -11,7 +11,7 @@ Page({
     reciting: false,          // 是否正在跟读录音
     display: [],              // 跟读结果（原文逐字，供对照）
     userAudio: '',            // 用户录音临时路径
-    playing: false,           // 回放自评是否正在播放
+    playState: 'idle',        // 回放自评状态：idle / playing / paused
     hasPrev: false,
     hasNext: false
   },
@@ -145,13 +145,16 @@ Page({
     wx.showToast({ title: '录音完成，可回放对照', icon: 'none' })
   },
 
-  // 回放自评（单实例，支持播放/停止切换，杜绝多实例叠加）
+  // 回放自评（单实例，支持 播放 / 暂停 / 从暂停处续播，杜绝多实例叠加）
   onPlayRecord() {
     if (!this.data.userAudio) return
-    if (this.data.playing) {
-      this._stopAudio()
+    const s = this.data.playState
+    if (s === 'playing') {
+      this._pauseAudio()      // 正在播放 -> 暂停（保留进度）
+    } else if (s === 'paused') {
+      this._resumeAudio()     // 已暂停 -> 从暂停处继续
     } else {
-      this._playAudio()
+      this._playAudio()       // idle -> 从头播放
     }
   },
 
@@ -161,30 +164,47 @@ Page({
     const audio = wx.createInnerAudioContext()
     this._audio = audio
     audio.src = this.data.userAudio
+    audio.onPlay(() => {
+      this.setData({ playState: 'playing' })
+      console.log('[Play] onPlay')
+    })
+    audio.onPause(() => {
+      this.setData({ playState: 'paused' })
+      console.log('[Play] onPause')
+    })
     audio.onEnded(() => {
-      this.setData({ playing: false })
+      // 自然播放结束：进度归零，释放实例
+      this.setData({ playState: 'idle' })
+      this._audio = null
       console.log('[Play] onEnded')
     })
     audio.onStop(() => {
-      this.setData({ playing: false })
+      this.setData({ playState: 'idle' })
       console.log('[Play] onStop')
     })
     audio.onError(() => {
-      this.setData({ playing: false })
+      this.setData({ playState: 'idle' })
       wx.showToast({ title: '回放失败', icon: 'none' })
       console.error('[Play] onError')
     })
     audio.play()
-    // 乐观置为播放态，使按钮立即切换为「停止回放」，避免连点产生叠加
-    this.setData({ playing: true })
+    // 乐观置为播放态，使按钮立即切换，避免连点产生叠加
+    this.setData({ playState: 'playing' })
     console.log('[Play] play start')
   },
 
-  _stopAudio() {
+  _pauseAudio() {
     if (this._audio) {
-      try { this._audio.stop() } catch (e) {}
+      try { this._audio.pause() } catch (e) {}   // 仅暂停，保留播放进度
     }
-    this.setData({ playing: false })
+    this.setData({ playState: 'paused' })
+  },
+
+  _resumeAudio() {
+    if (this._audio) {
+      try { this._audio.resume() } catch (e) {}  // 从暂停处继续
+    }
+    this.setData({ playState: 'playing' })
   },
 
   _destroyAudio() {
@@ -193,6 +213,7 @@ Page({
       try { this._audio.destroy() } catch (e) {}
       this._audio = null
     }
+    this.setData({ playState: 'idle' })
   },
 
   // 打开声纹授权协议
