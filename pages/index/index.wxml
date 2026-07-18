@@ -1,0 +1,59 @@
+<view class="page">
+  <view class="hero">
+    <view class="hero-sub"><text class="hero-sub-name">与陆歆影一起</text> · 按出生年代 · 品读千古文章</view>
+    <view class="hero-title serif-title">唐宋八大家</view>
+    <view class="hero-desc">韩愈 · 柳宗元 · 欧阳修 · 苏洵 · 曾巩 · 王安石 · 苏轼 · 苏辙</view>
+  </view>
+
+  <!-- 搜索框 -->
+  <view class="search-bar">
+    <view class="search-box">
+      <text class="search-ico">🔍</text>
+      <input class="search-input" placeholder="搜索诗名或内容" value="{{searchKey}}" bindinput="onSearchInput" confirm-type="search"/>
+    </view>
+    <view class="search-clear" wx:if="{{searching}}" bindtap="onClearSearch">取消</view>
+  </view>
+
+  <!-- 搜索结果 -->
+  <view class="search-result" wx:if="{{searching}}">
+    <view class="sr-item card" wx:for="{{searchResults}}" wx:key="id"
+          data-id="{{item.id}}" bindtap="onTapSearchResult">
+      <view class="sr-title serif-title">{{item.title}}</view>
+      <view class="sr-meta">{{item.authorName}} · {{item.firstLine}}…</view>
+    </view>
+    <view class="sr-empty" wx:if="{{searchResults.length === 0}}">未找到相关诗词</view>
+    <view class="footer">点击结果，查看诗词与译文</view>
+  </view>
+
+  <!-- 时间轴 -->
+  <view class="timeline" wx:if="{{!searching}}">
+    <view
+      class="tl-item {{index % 2 === 0 ? 'left' : 'right'}}"
+      wx:for="{{authors}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="onTapAuthor"
+    >
+      <view class="tl-dot">{{index + 1}}</view>
+      <view class="tl-life">
+        <text class="tl-life-b">{{item.birth}}</text>
+        <text class="tl-life-d">{{item.death}}</text>
+      </view>
+      <view class="tl-card card">
+        <view class="tl-head">
+          <text class="tl-name serif-title">{{item.name}}</text>
+          <view class="tl-vbtn" catchtap="onTapVideo" data-id="{{item.id}}">▶ 视频</view>
+          <text class="tag">{{item.dynasty}}</text>
+        </view>
+        <view class="tl-zi">字{{item.zi}} · 号{{item.hao}}</view>
+        <view class="tl-intro">{{item.intro}}</view>
+        <view class="tl-foot">
+          <text class="tl-title-line">{{item.title}}</text>
+          <text class="tl-count">{{item.count}} 首可阅</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="footer" wx:if="{{!searching}}">点击人物卡片，开启诗词赏析与学习之旅</view>
+</view>

@@ -1,0 +1,33 @@
+<view class="page" wx:if="{{author}}">
+  <view class="banner">
+    <view class="big-name-row">
+      <text class="big-name serif-title">{{author.name}}</text>
+      <view class="big-vbtn" catchtap="onTapVideo">▶ 视频</view>
+    </view>
+    <view class="big-zi">字{{author.zi}} · 号{{author.hao}}</view>
+    <view class="big-meta">
+      <text class="tag">{{author.dynasty}}</text>
+      <text class="meta-text">{{author.birth}}–{{author.death}}</text>
+      <text class="meta-text">{{author.birthplace}}</text>
+    </view>
+    <view class="big-title">{{author.title}}</view>
+  </view>
+
+  <view class="card block">
+    <view class="section-title">生平简介</view>
+    <view class="bio">{{author.intro}}</view>
+  </view>
+
+  <view class="card block">
+    <view class="section-title">主要成就</view>
+    <view class="ach-item" wx:for="{{author.achievements}}" wx:key="*this">
+      <text class="ach-dot">·</text>
+      <text class="ach-text">{{item}}</text>
+    </view>
+  </view>
+
+  <view class="enter" bindtap="goPoems">
+    <text>查看其代表诗词（{{count}} 首）</text>
+    <text class="enter-arrow">›</text>
+  </view>
+</view>

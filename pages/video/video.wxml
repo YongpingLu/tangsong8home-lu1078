@@ -1,0 +1,22 @@
+<view class="page">
+  <view class="v-head">
+    <text class="v-title">{{authorName}} · 纪录片</text>
+    <text class="v-sub">央视《宗师列传·唐宋八大家》</text>
+  </view>
+
+  <view class="v-note">{{vNote}}</view>
+
+  <view wx:if="{{episodes.length > 1}}" class="ep-count">本片共 {{episodes.length}} 集，可分别复制观看</view>
+
+  <view class="ep-list">
+    <view class="ep-card" wx:for="{{episodes}}" wx:key="idx" wx:for-index="idx">
+      <view class="ep-badge">{{item.label}}</view>
+      <view class="ep-body">
+        <text class="ep-title">{{item.title}}</text>
+        <button class="ep-btn" data-url="{{item.pageUrl}}" data-idx="{{idx}}" bindtap="onCopyLink">
+          {{copiedIdx === idx ? '已复制 ✓' : '复制观看链接'}}
+        </button>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,27 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/person/person",
+    "pages/poems/poems",
+    "pages/agreement/agreement",
+    "pages/video/video"
+  ],
+  "subPackages": [
+    {
+      "root": "packagePoem",
+      "pages": [
+        "pages/poem/poem"
+      ]
+    }
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#7a1f1f",
+    "navigationBarTitleText": "唐宋八大家",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f3ece0"
+  },
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents",
+  "style": "v2"
+}

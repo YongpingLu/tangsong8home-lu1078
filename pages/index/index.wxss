@@ -1,0 +1,188 @@
+.page {
+  padding: 0 0 60rpx;
+}
+
+.hero {
+  background: linear-gradient(160deg, #7a1f1f 0%, #9c2b2b 60%, #b8860b 140%);
+  color: #f7efe0;
+  padding: 70rpx 40rpx 80rpx;
+  text-align: center;
+  border-bottom-left-radius: 40rpx;
+  border-bottom-right-radius: 40rpx;
+}
+.hero-sub {
+  font-size: 24rpx;
+  opacity: 0.85;
+  letter-spacing: 6rpx;
+}
+.hero-sub-name {
+  color: #ffe9b8;
+  opacity: 0.9;
+  font-family: "KaiTi", "STKaiti", "Songti SC", serif;
+  letter-spacing: 4rpx;
+}
+.hero-title {
+  font-size: 76rpx;
+  font-weight: 700;
+  margin: 18rpx 0 22rpx;
+  letter-spacing: 12rpx;
+  text-shadow: 0 4rpx 16rpx rgba(0,0,0,0.25);
+}
+.hero-desc {
+  font-size: 24rpx;
+  opacity: 0.92;
+  line-height: 1.8;
+}
+
+.timeline {
+  padding: 50rpx 36rpx 0;
+}
+.tl-item {
+  position: relative;
+  padding-left: 96rpx;
+  margin-bottom: 40rpx;
+}
+.tl-item.right {
+  padding-left: 96rpx;
+}
+.tl-dot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  background: #7a1f1f;
+  color: #f7efe0;
+  font-size: 30rpx;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 10rpx rgba(122,31,31,0.12);
+}
+.tl-dot::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 64rpx;
+  width: 2rpx;
+  height: 100%;
+  background: #d9c7a8;
+  transform: translateX(-50%);
+}
+.tl-item:last-child .tl-dot::after { display: none; }
+
+/* 序号下方的生卒年，形成时间轴刻度 */
+.tl-life {
+  position: absolute;
+  left: 0;
+  top: 76rpx;
+  width: 64rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 34rpx;
+  z-index: 1;
+}
+.tl-life-b,
+.tl-life-d {
+  font-size: 20rpx;
+  line-height: 1.2;
+  letter-spacing: 1rpx;
+  background: #f3ece0;
+  padding: 3rpx 2rpx;
+  border-radius: 6rpx;
+}
+.tl-life-b { color: #7a1f1f; font-weight: 600; }
+.tl-life-d { color: #a98b52; }
+
+.tl-card { padding: 26rpx 28rpx; }
+.tl-head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+.tl-name {
+  font-size: 44rpx;
+  color: #7a1f1f;
+  font-weight: 700;
+  margin-right: 14rpx;
+}
+.tl-zi {
+  font-size: 24rpx;
+  color: #6b5a3e;
+  margin: 8rpx 0 14rpx;
+}
+.tl-intro {
+  font-size: 26rpx;
+  color: #4a4239;
+  line-height: 1.75;
+  text-align: justify;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+}
+.tl-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 18rpx;
+  padding-top: 16rpx;
+  border-top: 1rpx dashed #e4d8c4;
+}
+.tl-title-line {
+  font-size: 24rpx;
+  color: #b8860b;
+}
+.tl-count {
+  font-size: 24rpx;
+  color: #7a1f1f;
+  font-weight: 600;
+}
+.tl-vbtn {
+  font-size: 22rpx;
+  color: #fff;
+  background: #b8860b;
+  padding: 6rpx 16rpx;
+  border-radius: 30rpx;
+  box-shadow: 0 2rpx 8rpx rgba(184,134,11,0.35);
+  align-self: center;
+  margin-right: 14rpx;
+  white-space: nowrap;
+}
+.tl-vbtn:active { opacity: 0.8; }
+.footer {
+  text-align: center;
+  color: #9c8a68;
+  font-size: 24rpx;
+  margin-top: 30rpx;
+}
+
+/* 搜索框 */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  padding: 22rpx 32rpx 18rpx;
+}
+.search-box {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 1rpx solid #e4d8c4;
+  border-radius: 40rpx;
+  padding: 12rpx 24rpx;
+}
+.search-ico { font-size: 28rpx; margin-right: 12rpx; }
+.search-input { flex: 1; font-size: 28rpx; color: #2b2622; }
+.search-clear { font-size: 28rpx; color: #7a1f1f; padding: 6rpx 10rpx; }
+
+/* 搜索结果 */
+.search-result { padding: 8rpx 32rpx 30rpx; }
+.sr-item { padding: 24rpx 26rpx; margin-bottom: 18rpx; }
+.sr-title { font-size: 34rpx; color: #2b2622; font-weight: 600; }
+.sr-meta { font-size: 24rpx; color: #6b5a3e; margin-top: 8rpx; line-height: 1.5; }
+.sr-empty { text-align: center; color: #9c8a68; font-size: 26rpx; padding: 40rpx 0; }

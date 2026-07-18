@@ -1,0 +1,70 @@
+/* 全局样式：宣纸 + 墨色 + 朱砂红的主题 */
+page {
+  background: #f3ece0;
+  color: #2b2622;
+  font-family: "Songti SC", "STSong", "SimSun", "Noto Serif CJK SC", serif;
+  font-size: 30rpx;
+  line-height: 1.7;
+}
+
+view, text, scroll-view {
+  box-sizing: border-box;
+}
+
+/* 通用卡片 */
+.card {
+  background: #fbf7ef;
+  border: 1rpx solid #e4d8c4;
+  border-radius: 16rpx;
+  padding: 28rpx;
+  box-shadow: 0 4rpx 16rpx rgba(122, 31, 31, 0.06);
+}
+
+/* 标题字 */
+.serif-title {
+  font-family: "KaiTi", "STKaiti", "Songti SC", serif;
+  letter-spacing: 4rpx;
+}
+
+/* 朱砂红按钮 */
+.btn-primary {
+  background: #7a1f1f;
+  color: #f7efe0;
+  border-radius: 999rpx;
+  font-size: 28rpx;
+  padding: 16rpx 40rpx;
+  border: none;
+  line-height: 1.4;
+}
+.btn-primary::after { border: none; }
+
+.btn-ghost {
+  background: transparent;
+  color: #7a1f1f;
+  border: 1rpx solid #7a1f1f;
+  border-radius: 999rpx;
+  font-size: 28rpx;
+  padding: 14rpx 36rpx;
+  line-height: 1.4;
+}
+.btn-ghost::after { border: none; }
+
+/* 朝代 / 体裁小标签 */
+.tag {
+  display: inline-block;
+  font-size: 22rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 8rpx;
+  background: #efe2cf;
+  color: #8a6d3b;
+  margin-right: 12rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  color: #7a1f1f;
+  font-weight: 600;
+  margin: 8rpx 0 20rpx;
+  border-left: 8rpx solid #b8860b;
+  padding-left: 18rpx;
+}

@@ -1,0 +1,61 @@
+<view class="page">
+  <!-- 头部 -->
+  <view class="hero">
+    <view class="hero-title">{{poem.title}}</view>
+    <view class="hero-meta">{{author.name}} · {{poem.type}}</view>
+  </view>
+
+  <!-- 诗文 -->
+  <view class="card">
+    <view class="poem-line" wx:for="{{lines}}" wx:key="index" wx:for-item="line">
+      <text class="line-text">{{line}}</text>
+    </view>
+  </view>
+
+  <!-- 赏析 -->
+  <view class="card note">
+    <text class="section-title">赏析</text>
+    <text class="note-text">{{poem.note}}</text>
+  </view>
+
+  <!-- 译文（点击展开） -->
+  <view class="card note">
+    <view class="note-head" bindtap="onToggleTranslation">
+      <text class="section-title">译文</text>
+      <text class="toggle">{{showTranslation ? '收起 ▲' : '展开 ▼'}}</text>
+    </view>
+    <text class="note-text" wx:if="{{showTranslation && translation}}">{{translation}}</text>
+    <text class="note-text muted" wx:elif="{{showTranslation}}">本篇暂无译文</text>
+  </view>
+
+  <!-- 跟读工具栏 -->
+  <view class="toolbar">
+    <button class="tbtn primary" bindtap="onStartRecite" wx:if="{{!reciting}}">我要跟读</button>
+    <button class="tbtn primary" bindtap="onStopRecite" wx:else>停止跟读</button>
+    <button class="tbtn {{playing ? 'playing' : ''}}" bindtap="onPlayRecord" wx:if="{{userAudio}}">{{playing ? '停止回放' : '回放自评'}}</button>
+  </view>
+  <view class="tip">提示：跟读录音仅保存在你的设备本地，用于对照原文回放练习，不会上传。</view>
+
+  <!-- 跟读结果 -->
+  <view class="card result" wx:if="{{display.length > 0}}">
+    <view class="result-head">
+      <text class="section-title">跟读对照</text>
+      <view class="offline-tag">本地回放</view>
+    </view>
+    <view class="result-lines">
+      <view class="rl-line" wx:for="{{display}}" wx:key="index" wx:for-item="seg">{{seg.text}}</view>
+    </view>
+  </view>
+
+  <!-- 声纹授权协议入口 -->
+  <view class="agreement-entry" bindtap="onOpenAgreement">
+    <text class="agreement-link">《声纹授权协议》</text>
+    <text class="agreement-desc">（录音功能相关说明）</text>
+  </view>
+
+  <!-- 上下篇 -->
+  <view class="nav-row">
+    <button class="navbtn" bindtap="onPrev" wx:if="{{hasPrev}}">上一篇</button>
+    <button class="navbtn" bindtap="onNext" wx:if="{{hasNext}}">下一篇</button>
+  </view>
+</view>

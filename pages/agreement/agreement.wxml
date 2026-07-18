@@ -1,0 +1,35 @@
+<view class="page">
+  <view class="title">声纹授权协议</view>
+  <view class="update">更新日期：2026-07-15</view>
+
+  <view class="sec">
+    <view class="sec-h">一、收集目的</view>
+    <view class="sec-p">为提供「我要跟读」诗词练习功能，本小程序需使用设备麦克风录制您朗读诗词的声音，用于与原文对照回放、辅助您自行练习与纠正发音。</view>
+  </view>
+
+  <view class="sec">
+    <view class="sec-h">二、收集方式与范围</view>
+    <view class="sec-p">仅在您主动点击「我要跟读」并明确开始录音后，方通过微信录音接口采集声音信号；录制内容为您朗读的诗词语音，不包含其他环境无关音频。</view>
+  </view>
+
+  <view class="sec">
+    <view class="sec-h">三、使用与存储用途</view>
+    <view class="sec-p">1. 录音文件仅临时保存在您当前设备的本地缓存中，用于「回放自评」对照原文。<br/>2. 我们<text class="strong">不会</text>将您的声纹或录音上传至任何服务器，<text class="strong">不会</text>用于身份识别、声纹比对或任何商业化用途。<br/>3. 您可随时在微信中清除小程序缓存以删除本地录音。</view>
+  </view>
+
+  <view class="sec">
+    <view class="sec-h">四、您的权利</view>
+    <view class="sec-p">1. 您可随时撤回授权：在「声纹授权协议」页点击「撤回授权」即可，撤回后「我要跟读」将无法正常使用。<br/>2. 您有权拒绝提供声纹信息，这不会影响您浏览诗词、赏析与译文等其他功能。</view>
+  </view>
+
+  <view class="sec">
+    <view class="sec-h">五、未成年人说明</view>
+    <view class="sec-p">若您为未成年人，请在监护人陪同下阅读并决定是否使用跟读功能。</view>
+  </view>
+
+  <view class="actions">
+    <button class="btn agree" bindtap="onAgree" wx:if="{{!consented}}">我已阅读并同意</button>
+    <button class="btn agreed" wx:else>已同意授权 ✓</button>
+    <button class="btn disagree" bindtap="onDisagree" wx:if="{{consented}}">撤回授权</button>
+  </view>
+</view>

@@ -1,0 +1,69 @@
+.page { padding: 30rpx 30rpx 60rpx; }
+
+.list-head {
+  display: flex;
+  align-items: baseline;
+  padding: 10rpx 6rpx 24rpx;
+  border-bottom: 2rpx solid #e4d8c4;
+  margin-bottom: 26rpx;
+}
+.lh-name {
+  font-size: 46rpx;
+  color: #7a1f1f;
+  font-weight: 700;
+  margin-right: 18rpx;
+}
+.lh-count {
+  font-size: 24rpx;
+  color: #9c8a68;
+}
+
+.poem-item {
+  margin-bottom: 22rpx;
+  padding: 26rpx 28rpx;
+}
+.pi-top {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+.pi-title {
+  font-size: 34rpx;
+  color: #2b2622;
+  font-weight: 600;
+  margin-right: 14rpx;
+}
+.pi-preview {
+  font-size: 26rpx;
+  color: #6b5a3e;
+  line-height: 1.6;
+}
+
+.list-foot {
+  text-align: center;
+  color: #9c8a68;
+  font-size: 24rpx;
+  margin-top: 26rpx;
+}
+
+/* 搜索框 */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-bottom: 24rpx;
+}
+.search-box {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 1rpx solid #e4d8c4;
+  border-radius: 40rpx;
+  padding: 12rpx 24rpx;
+}
+.search-ico { font-size: 28rpx; margin-right: 12rpx; }
+.search-input { flex: 1; font-size: 28rpx; color: #2b2622; }
+.search-clear { font-size: 28rpx; color: #7a1f1f; padding: 6rpx 10rpx; }
+
+.poem-item.card { border-left: 6rpx solid #c9a36a; }
