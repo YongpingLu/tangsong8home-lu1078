@@ -1,0 +1,29 @@
+<!doctype html><html lang="zh"><head><meta charset="utf-8"><style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{background:#e7dcc4;}
+  .tile{width:1080px;height:1080px;position:relative;overflow:hidden;
+    background:radial-gradient(circle at 20% 12%,#fcf6ea 0%,rgba(252,246,234,0) 45%),
+      linear-gradient(160deg,#f8f0e1 0%,#efe2c8 100%);
+    font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif;color:#3a2a1a;
+    padding:54px 50px;display:flex;flex-direction:column;}
+  .tile::before{content:"";position:absolute;inset:0;
+    background-image:radial-gradient(#0000000c 1px,transparent 1px);background-size:26px 26px;}
+  .head{display:flex;align-items:center;gap:18px;position:relative;z-index:2;}
+  .idx{width:74px;height:74px;border-radius:50%;background:#B8860B;color:#fff;font-size:42px;
+    font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;
+    box-shadow:0 3px 10px rgba(122,31,31,.25);}
+  .rname{font-size:62px;font-weight:800;color:#7A1F1F;letter-spacing:2px;}
+  .thumb{flex:1;width:100%;margin-top:34px;border-radius:18px;object-fit:cover;
+    background:#eee;display:block;box-shadow:0 6px 18px rgba(122,31,31,.18);border:3px solid #7A1F1F;}
+  .thumb.ph{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;
+    border:4px dashed #c9a24a;color:#a07d34;font-size:38px;line-height:1.4;background:#fff7e8;}
+  .joke{margin-top:30px;background:#fffaf0;border-left:10px solid #7A1F1F;border-radius:0 14px 14px 0;
+    padding:22px 26px;font-size:38px;line-height:1.4;color:#5a4632;position:relative;z-index:2;font-weight:600;}
+  .wm{position:absolute;right:36px;bottom:30px;font-size:40px;font-weight:800;color:rgba(122,31,31,.18);
+    transform:rotate(-10deg);z-index:1;}
+  </style></head><body><div class="tile">
+    <div class="head"><span class="idx">⑨</span><span class="rname">客服是我</span></div>
+    <div class="thumb ph">此岗位暂无截图<br>但活儿真是我干的</div>
+    <div class="joke">亲，在的，我就是老板本人</div>
+    <div class="wm">OPC</div>
+  </div></body></html>
