@@ -29,6 +29,9 @@ Page({
 
     wx.setNavigationBarTitle({ title: poem.title })
 
+    this._audio = null      // 当前回放实例
+    this._pos = 0           // 回放进度（秒），用于暂停后续播
+
     this.setData({
       poem,
       author,
@@ -158,51 +161,64 @@ Page({
     }
   },
 
+  _bindAudio(audio) {
+    audio.onPlay(() => this.setData({ playState: 'playing' }))
+    audio.onTimeUpdate(() => { this._pos = audio.currentTime })
+    audio.onEnded(() => {
+      this.setData({ playState: 'idle' })
+      this._audio = null
+      this._pos = 0
+    })
+    audio.onError(() => {
+      this.setData({ playState: 'idle' })
+      this._pos = 0
+      wx.showToast({ title: '回放失败', icon: 'none' })
+    })
+  },
+
   _playAudio() {
     // 先销毁任何旧实例，确保同一时刻只有一个播放器
     this._destroyAudio()
     const audio = wx.createInnerAudioContext()
     this._audio = audio
+    this._pos = 0
     audio.src = this.data.userAudio
-    audio.onPlay(() => {
-      this.setData({ playState: 'playing' })
-      console.log('[Play] onPlay')
-    })
-    audio.onPause(() => {
-      this.setData({ playState: 'paused' })
-      console.log('[Play] onPause')
-    })
-    audio.onEnded(() => {
-      // 自然播放结束：进度归零，释放实例
-      this.setData({ playState: 'idle' })
-      this._audio = null
-      console.log('[Play] onEnded')
-    })
-    audio.onStop(() => {
-      this.setData({ playState: 'idle' })
-      console.log('[Play] onStop')
-    })
-    audio.onError(() => {
-      this.setData({ playState: 'idle' })
-      wx.showToast({ title: '回放失败', icon: 'none' })
-      console.error('[Play] onError')
-    })
+    this._bindAudio(audio)
     audio.play()
     // 乐观置为播放态，使按钮立即切换，避免连点产生叠加
     this.setData({ playState: 'playing' })
-    console.log('[Play] play start')
   },
 
   _pauseAudio() {
     if (this._audio) {
-      try { this._audio.pause() } catch (e) {}   // 仅暂停，保留播放进度
+      try { this._pos = this._audio.currentTime } catch (e) {} // 记录当前进度
+      try { this._audio.stop() } catch (e) {}                  // 停止播放（保留 _pos）
     }
     this.setData({ playState: 'paused' })
   },
 
   _resumeAudio() {
-    if (this._audio) {
-      try { this._audio.resume() } catch (e) {}  // 从暂停处继续
+    // 重建实例：先 play() 让播放器进入可播放态，再 seek 到断点
+    // （InnerAudioContext.seek 必须在播放态才生效，故不能先 seek 后 play）
+    const from = this._pos || 0
+    this._destroyAudio()
+    const audio = wx.createInnerAudioContext()
+    this._audio = audio
+    audio.src = this.data.userAudio
+    this._bindAudio(audio)
+    if (from > 0) {
+      let applied = false
+      audio.onTimeUpdate(() => {
+        // 首帧可能尚未应用 seek，播放中再补一次定位，确保从断点续播
+        if (!applied && audio.currentTime < from - 0.05) {
+          applied = true
+          try { audio.seek(from) } catch (e) {}
+        }
+      })
+    }
+    audio.play()
+    if (from > 0) {
+      try { audio.seek(from) } catch (e) {} // play 后紧跟 seek，多数基础库生效
     }
     this.setData({ playState: 'playing' })
   },
@@ -214,6 +230,7 @@ Page({
       this._audio = null
     }
     this.setData({ playState: 'idle' })
+    this._pos = 0
   },
 
   // 打开声纹授权协议
